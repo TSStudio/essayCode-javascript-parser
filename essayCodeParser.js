@@ -24,7 +24,7 @@ function setfontstyle(t){
         else{dargs[i]=args[i];}
     }
     lastfontstyle="font-size:"+dargs[0]+";font-weight:"+dargs[1]+";color:"+dargs[2]+";text-align:"+dargs[3]+";text-decoration:"+dargs[4]+";font-family:"+dargs[5]+";";
-    inlabelstyle=lastfontstyle.replace(/&/,",").replace(/"/,"&quot;");
+    inlabelstyle=lastfontstyle.replace(/#/,",").replace(/"/,"&quot;");
     return "</font><font style=\""+inlabelstyle+"\">";
 }
 function image_parser(t){
