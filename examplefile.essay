@@ -1,0 +1,30 @@
+\title(主标题)
+这是普通文本
+\smalltitle(小标题)
+普通文本
+\\
+换行
+\par 
+换段
+\beginbox(100%,,red)
+box修改背景颜色
+\setfont(,,white)
+文本修改
+\beginbox(90%,,green)
+嵌套box尺寸修改及更换背景颜色
+\endbox()
+\beginbox(90%,default,green)
+嵌套box对齐方式修改
+\endbox()
+\endbox()
+\setfont()
+恢复文本默认值\\
+独行公式
+$$f(x)=e^x$$
+这是行内公式 $\pi (x)=\dfrac{x}{\ln(x)}$，而这是行间代码：
+\CODE
+int main(){
+    return 0;
+}
+\CODE
+也可添加行内代码，比如 `main()` 这样
