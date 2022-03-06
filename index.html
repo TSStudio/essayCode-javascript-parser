@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html style="height:100%;">
     <head>
+        <meta charset="UTF-8">
         <script src="essayCodeParser.js"></script>
         <script>
             function refreshEssay(){
@@ -31,4 +32,12 @@
         <div id="essay" style="display:inline-block;width:49%;border:3px solid black;vertical-align:top;">
         </div>
     </body>
+    <script>
+        window.onload=function(){
+            inputArea=document.getElementById("inputarea");
+            inputArea.value='\\title(主标题)\n这是普通文本\n\\smalltitle(小标题)\n普通文本\n\\\\\n换行\n\\par \n换段\n\\beginbox(100%,,red)\nbox修改背景颜色\n\\setfont(,,white)\n文本颜色修改\n\\beginbox(90%,,green)\n嵌套box尺寸修改及更换背景颜色\n\\endbox()\n\\beginbox(90%,default,#66CCFF)\n\\setfont(2em,bold,black,,underline,"宋体"#"sans-serif")\n嵌套box对齐方式修改及文本更多属性修改\n\\endbox()\n\\endbox()\n\\setfont()\n恢复文本默认值\\\\\n独行公式\n$$f(x)=e^x$$\n这是行内公式 $\\pi (x)=\\dfrac{x}{\\ln(x)}$，而这是行间代码：\n\\CODE\nint main(){\n    return 0;\n}\n\\CODE\n也可添加行内代码，比如 `main()` 这样，注意：为了性能考虑，只有当你的鼠标点击别处（焦点离开编辑框）时，右侧的内容才会刷新。';
+            refreshEssay();
+        };
+
+    </script>
 </html>

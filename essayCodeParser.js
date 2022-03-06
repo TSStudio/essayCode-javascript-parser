@@ -19,9 +19,9 @@ function setfontstyle(t){
     dargs[4]="none";
     dargs[5]="\"黑体\"&\"sans-serif\"";
     for(i=0;i<6;i++){
-        if(i>args.length){break;}
-        if(args[i]==""){continue;}
-        dargs[i]=args[i];
+        if(i>=args.length){break;}
+        if(args[i]===""){continue;}
+        else{dargs[i]=args[i];}
     }
     lastfontstyle="font-size:"+dargs[0]+";font-weight:"+dargs[1]+";color:"+dargs[2]+";text-align:"+dargs[3]+";text-decoration:"+dargs[4]+";font-family:"+dargs[5]+";";
     inlabelstyle=lastfontstyle.replace(/&/,",").replace(/"/,"&quot;");
@@ -70,8 +70,8 @@ function beginbox_parser(t){
     dargs[1]="center";
     dargs[2]="transparent";
     for(i=0;i<3;i++){
-        if(i>args.length){break;}
-        if(args[i]==""){continue;}
+        if(i>=args.length){break;}
+        if(args[i]===""){continue;}
         dargs[i]=args[i];
     }
     if(dargs[1]!="center"&&dargs[1]!="default"){

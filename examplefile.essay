@@ -9,12 +9,13 @@
 \beginbox(100%,,red)
 box修改背景颜色
 \setfont(,,white)
-文本修改
+文本颜色修改
 \beginbox(90%,,green)
 嵌套box尺寸修改及更换背景颜色
 \endbox()
-\beginbox(90%,default,green)
-嵌套box对齐方式修改
+\beginbox(90%,default,#66CCFF)
+\setfont(2em,bold,black,,underline,"宋体"#"sans-serif")
+嵌套box对齐方式修改及文本更多属性修改
 \endbox()
 \endbox()
 \setfont()
@@ -27,4 +28,4 @@ int main(){
     return 0;
 }
 \CODE
-也可添加行内代码，比如 `main()` 这样
+也可添加行内代码，比如 `main()` 这样，注意：为了性能考虑，只有当你的鼠标点击别处（焦点离开编辑框）时，右侧的内容才会刷新。
