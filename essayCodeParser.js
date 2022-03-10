@@ -123,33 +123,33 @@ function htmlEncode(html){
 function formulaprocessor(str){
     Formulas[countFormula]=str;
     countFormula++;
-    return "EFSOSRAMYUCLOADEPARSERSERIALNO"+toString(countFormula-1);
+    return "EFSOSRAMYUCLOADEPARSERSERIALNO"+toString(countFormula-1)+"ENDPPPVF";
 }
 function codeprocessor(str){
     Codes[countCode]=htmlEncode(str.replace(/\\CODE/g,""));
     countCode++;
-    return "ECSOSDAEYCODEPARSERSERIALNO"+toString(countCode-1);
+    return "ECSOSDAEYCODEPARSERSERIALNO"+toString(countCode-1)+"ENDPPPVF";
 }
 function inlineprocessor(str){
     inlineCodes[countInlineCode]=htmlEncode(str.replace(/`/g,""));
     countInlineCode++;
-    return "ECSOSDAEYICNOLDIENPEARSERSERIALNO"+toString(countInlineCode-1);
+    return "ECSOSDAEYICNOLDIENPEARSERSERIALNO"+toString(countInlineCode-1)+"ENDPPPVF";
 }
 function formulaback(str){
     for(i=0;i<countFormula;i++){
-        str=str.replace("EFSOSRAMYUCLOADEPARSERSERIALNO"+toString(i),("</font> "+Formulas[i]+" <font style=\""+inlabelstyle+"\">").replace(/\$/g,"$$$$"));
+        str=str.replace("EFSOSRAMYUCLOADEPARSERSERIALNO"+toString(i)+"ENDPPPVF",("</font> "+Formulas[i]+" <font style=\""+inlabelstyle+"\">").replace(/\$/g,"$$$$"));
     }
     return str;
 }
 function codeback(str){
     for(i=0;i<countCode;i++){
-        str=str.replace("ECSOSDAEYCODEPARSERSERIALNO"+toString(i),("</font></p><pre style=\"width:100%;background-color:#1E1E1E;color:#D4D4D4;font-family:&quot;Consolas&quot;,&quot;Courier New&quot;\">"+Codes[i]+"</pre><p><font style=\""+inlabelstyle+"\">").replace(/\$/g,"$$$$"));
+        str=str.replace("ECSOSDAEYCODEPARSERSERIALNO"+toString(i)+"ENDPPPVF",("</font></p><pre style=\"width:100%;background-color:#1E1E1E;color:#D4D4D4;font-family:&quot;Consolas&quot;,&quot;Courier New&quot;\">"+Codes[i]+"</pre><p><font style=\""+inlabelstyle+"\">").replace(/\$/g,"$$$$"));
     }
     return str;
 }
 function inlinecodeback(str){
     for(i=0;i<countInlineCode;i++){
-        str=str.replace("ECSOSDAEYICNOLDIENPEARSERSERIALNO"+toString(i),("</font><font style=\"background-color:#eeeeee;color:#020202;border:1px solid black;font-family:&quot;Consolas&quot;,&quot;Courier New&quot;\">"+inlineCodes[i]+"</font><font style=\""+inlabelstyle+"\">").replace(/\$/g,"$$$$"));
+        str=str.replace("ECSOSDAEYICNOLDIENPEARSERSERIALNO"+toString(i)+"ENDPPPVF",("</font><font style=\"background-color:#eeeeee;color:#020202;border:1px solid black;font-family:&quot;Consolas&quot;,&quot;Courier New&quot;\">"+inlineCodes[i]+"</font><font style=\""+inlabelstyle+"\">").replace(/\$/g,"$$$$"));
     }
     return str;
 }
