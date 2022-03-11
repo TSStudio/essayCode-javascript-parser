@@ -1,4 +1,4 @@
-var lastfontstyle="font-size:1em;font-weight:normal;color:#000000;text-align:left;text-decoration:none;font-family:\"黑体\",\"sans-serif\";";
+var lastfontstyle="font-size:15px;font-weight:normal;color:#000000;text-align:justify;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;";
 var inlabelstyle=""
 function existFunction(funcName){
     try{
@@ -15,9 +15,9 @@ function setfontstyle(t){
     dargs[0]="1em";
     dargs[1]="normal";
     dargs[2]="#000000";
-    dargs[3]="left";
+    dargs[3]="justify";
     dargs[4]="none";
-    dargs[5]="\"黑体\"&\"sans-serif\"";
+    dargs[5]="-apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif";
     for(i=0;i<6;i++){
         if(i>=args.length){break;}
         if(args[i]===""){continue;}
