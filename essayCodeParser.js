@@ -12,7 +12,7 @@ function setfontstyle(t){
     t=t.replace(/[\(\)]/g,"");
     args=t.split(",");
     dargs=new Array();
-    dargs[0]="1em";
+    dargs[0]="15px";
     dargs[1]="normal";
     dargs[2]="#000000";
     dargs[3]="justify";
@@ -160,7 +160,7 @@ function parse(str){
     countFormula=0;
     countCode=0;
     countInlineCode=0;
-    lastfontstyle="font-size:1em;font-weight:normal;color:#000000;text-align:left;text-decoration:none;font-family:\"黑体\",\"sans-serif\";";
+    lastfontstyle="font-size:15px;font-weight:normal;color:#000000;text-align:justify;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;";
     inlabelstyle=lastfontstyle.replace(/"/,"&quot;");
     //protects formulas and codes
     str=str.replace(/`[\s\S]*?`/g,inlineprocessor);
@@ -168,7 +168,6 @@ function parse(str){
     str=str.replace(/\$\$[\s\S]*?\$\$/g,formulaprocessor);
     str=str.replace(/\$[\s\S]*?\$/g,formulaprocessor);
     end="<p><font>"+str.replace(/\\[a-zA-Z-\\]+(\([\s\S]*?\))?/g,exp)+"</font></p>";
-    console.log(end);
     end=formulaback(end);
     end=inlinecodeback(end);
     end=codeback(end);
