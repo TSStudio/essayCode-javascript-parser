@@ -143,13 +143,13 @@ function formulaback(str){
 }
 function codeback(str){
     for(i=0;i<countCode;i++){
-        str=str.replace("ECSOSDAEYCODEPARSERSERIALNO"+i.toString()+"ENDPPPVF",("</font></p><pre style=\"width:100%;background-color:#1E1E1E;color:#D4D4D4;font-family:&quot;Consolas&quot;,&quot;Courier New&quot;\">"+Codes[i]+"</pre><p><font style=\""+inlabelstyle+"\">").replace(/\$/g,"$$$$"));
+        str=str.replace("ECSOSDAEYCODEPARSERSERIALNO"+i.toString()+"ENDPPPVF",("</font></p><pre style=\"width:100%;background-color:#1E1E1E;color:#D4D4D4;font-family:Consolas,Courier New;overflow-y:scroll;\">"+Codes[i]+"</pre><p><font style=\""+inlabelstyle+"\">").replace(/\$/g,"$$$$"));
     }
     return str;
 }
 function inlinecodeback(str){
     for(i=0;i<countInlineCode;i++){
-        str=str.replace("ECSOSDAEYICNOLDIENPEARSERSERIALNO"+i.toString()+"ENDPPPVF",("</font><font style=\"background-color:#eeeeee;color:#020202;border:1px solid black;font-family:&quot;Consolas&quot;,&quot;Courier New&quot;\">"+inlineCodes[i]+"</font><font style=\""+inlabelstyle+"\">").replace(/\$/g,"$$$$"));
+        str=str.replace("ECSOSDAEYICNOLDIENPEARSERSERIALNO"+i.toString()+"ENDPPPVF",("</font><font style=\"background-color:#eeeeee;color:#020202;border:1px solid black;font-family:Consolas,Courier New;\">"+inlineCodes[i]+"</font><font style=\""+inlabelstyle+"\">").replace(/\$/g,"$$$$"));
     }
     return str;
 }
