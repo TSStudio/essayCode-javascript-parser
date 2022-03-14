@@ -143,7 +143,7 @@ function formulaback(str){
 }
 function codeback(str){
     for(i=0;i<countCode;i++){
-        str=str.replace("ECSOSDAEYCODEPARSERSERIALNO"+i.toString()+"ENDPPPVF",("</font></p><pre style=\"width:100%;background-color:#1E1E1E;color:#D4D4D4;font-family:Consolas,Courier New;overflow-y:scroll;\">"+Codes[i]+"</pre><p><font style=\""+inlabelstyle+"\">").replace(/\$/g,"$$$$"));
+        str=str.replace("ECSOSDAEYCODEPARSERSERIALNO"+i.toString()+"ENDPPPVF",("</font></p><pre style=\"width:100%;background-color:#1E1E1E;color:#D4D4D4;font-family:Consolas,Courier New;overflow-x:scroll;\">"+Codes[i]+"</pre><p><font style=\""+inlabelstyle+"\">").replace(/\$/g,"$$$$"));
     }
     return str;
 }
