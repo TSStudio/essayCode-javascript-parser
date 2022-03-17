@@ -1,5 +1,8 @@
+var defaultlastfontstyle="font-size:15px;font-weight:normal;color:#000000;text-align:justify;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;";
 var lastfontstyle="font-size:15px;font-weight:normal;color:#000000;text-align:justify;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;";
 var inlabelstyle=""
+var essayCodeParserVersion="1.3";
+var essayCodeVersion="1.0";
 function existFunction(funcName){
     try{
         if(typeof(eval(funcName))=="function"){
@@ -160,7 +163,7 @@ function parse(str){
     countFormula=0;
     countCode=0;
     countInlineCode=0;
-    lastfontstyle="font-size:15px;font-weight:normal;color:#000000;text-align:justify;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;";
+    lastfontstyle=defaultlastfontstyle;
     inlabelstyle=lastfontstyle.replace(/"/,"&quot;");
     //protects formulas and codes
     str=str.replace(/`[\s\S]*?`/g,inlineprocessor);
@@ -168,6 +171,7 @@ function parse(str){
     str=str.replace(/\$\$[\s\S]*?\$\$/g,formulaprocessor);
     str=str.replace(/\$[\s\S]*?\$/g,formulaprocessor);
     end="<p><font>"+str.replace(/\\[a-zA-Z-\\]+(\([\s\S]*?\))?/g,exp)+"</font></p>";
+    end=end+"<p>Rendered by essayCode Javascript Parser "+essayCodeParserVersion+" in essayCode "+essayCodeVersion+"</p>";
     end=formulaback(end);
     end=inlinecodeback(end);
     end=codeback(end);
