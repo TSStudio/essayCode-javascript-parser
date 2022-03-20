@@ -173,7 +173,7 @@ function parse(str){
     str=str.replace(/\\CODE[\s\S]*?\\CODE/g,codeprocessor);
     str=str.replace(/\$\$[\s\S]*?\$\$/g,formulaprocessor);
     str=str.replace(/\$[\s\S]*?\$/g,formulaprocessor);
-    end="<p><font>"+str.replace(/\\[a-zA-Z-\\]+(\([\s\S]*?\))?/g,exp)+"</font></p>";
+    end="<p><font style=\""+inlabelstyle+"\">"+str.replace(/\\[a-zA-Z-\\]+(\([\s\S]*?\))?/g,exp)+"</font></p>";
     end=end+"<p>Rendered by essayCode Javascript Parser "+essayCodeParserVersion+" in essayCode "+essayCodeVersion+"</p>";
     end=formulaback(end);
     end=inlinecodeback(end);
