@@ -144,9 +144,12 @@ function formulaback(str){
     }
     return str;
 }
+function trim(str){
+    return str.replace(/^\n+|\n+$/g,"");
+}
 function codeback(str){
     for(i=0;i<countCode;i++){
-        str=str.replace("ECSOSDAEYCODEPARSERSERIALNO"+i.toString()+"ENDPPPVF",("</font></p><pre style=\"width:100%;overflow-x:scroll;\"><code>"+Codes[i]+"</code></pre><p><font style=\""+inlabelstyle+"\">").replace(/\$/g,"$$$$"));
+        str=str.replace("ECSOSDAEYCODEPARSERSERIALNO"+i.toString()+"ENDPPPVF",("</font></p><pre style=\"width:100%;overflow-x:scroll;\"><code>"+trim(Codes[i])+"</code></pre><p><font style=\""+inlabelstyle+"\">").replace(/\$/g,"$$$$"));
     }
     return str;
 }
