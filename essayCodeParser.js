@@ -136,7 +136,6 @@ function formulaprocessor(str){
 }
 var ci;
 function langprocessor(str){
-    CodesLang[countCode]=curLang;
     if(str.replace(/\\CODE/g,"").replace(/[\(\)]/g,"")!=""){
         CodesLang[ci]=str.replace(/\\CODE/g,"").replace(/[\(\)]/g,"");
     }
