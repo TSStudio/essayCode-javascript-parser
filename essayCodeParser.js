@@ -43,7 +43,7 @@ function image_parser(t){
     if(args.length==1){
         return "<img src=\""+args[0]+"\" width=\"100%\" alt=\"image\">";
     }else if(args.length==2){
-        return "<img src=\""+args[0]+"\" width=\""+args[1]+"\">";
+        return "<img src=\""+args[0]+"\" width=\""+args[1]+"\" alt=\"image\">";
     }
     return "<img src=\""+args[0]+"\" width=\""+args[1]+"\" alt=\""+args[2]+"\">";
 }
