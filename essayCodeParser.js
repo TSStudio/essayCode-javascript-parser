@@ -1,8 +1,9 @@
 var defaultlastfontstyle="font-size:15px;font-weight:normal;color:#000000;text-align:justify;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;";
 var lastfontstyle="font-size:15px;font-weight:normal;color:#000000;text-align:justify;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;";
-var inlabelstyle=""
-var essayCodeParserVersion="1.3.1";
-var essayCodeVersion="1.0";
+var inlabelstyle="";
+var curLang="";
+var essayCodeParserVersion="1.4.0";
+var essayCodeVersion="1.1";
 function existFunction(funcName){
     try{
         if(typeof(eval(funcName))=="function"){
@@ -30,19 +31,24 @@ function setfontstyle(t){
     inlabelstyle=lastfontstyle.replace(/#/,",").replace(/"/,"&quot;");
     return "</font><font style=\""+inlabelstyle+"\">";
 }
+function setlanguage(t){
+    curLang=t.replace(/[\(\)]/g,"");
+}
 function image_parser(t){
     t=t.replace(/[\(\)]/g,"");
     if(t==""){
         return "Argument wrong Exception";
     }
     args=t.split(",");
-    if(args.length>2){
+    if(args.length>3){
         return "Argument wrong Exception";
     }
     if(args.length==1){
-        return "<img src=\""+args[0]+"\" width=\"100%\">";
+        return "<img src=\""+args[0]+"\" width=\"100%\" alt=\"image\">";
+    }else if(args.length==2){
+        return "<img src=\""+args[0]+"\" width=\""+args[1]+"\">";
     }
-    return "<img src=\""+args[0]+"\" width=\""+args[1]+"\">";
+    return "<img src=\""+args[0]+"\" width=\""+args[1]+"\" alt=\""+args[2]+"\">";
 }
 function title_parser(t){
     t=t.replace(/[\(\)]/g,"");
@@ -103,6 +109,8 @@ function exp(code){
         return title_parser(code.substr(6,code.length));
     }else if(code.substr(0,8)=="\\setfont"){
         return setfontstyle(code.substr(8,code.length));
+    }else if(code.substr(0,8)=="\\setlang"){
+        return setlanguage(code.substr(8,code.length));
     }else if(code.substr(0,9)=="\\beginbox"){
         return beginbox_parser(code.substr(9,code.length));
     }else if(code.substr(0,11)=="\\smalltitle"){
@@ -114,6 +122,7 @@ var countCode;
 var countInlineCode;
 var Formulas;
 var Codes;
+var CodesLang;
 var inlineCodes;
 function htmlEncode(html){
     var temp=document.createElement("div");
@@ -130,6 +139,7 @@ function formulaprocessor(str){
 }
 function codeprocessor(str){
     Codes[countCode]=htmlEncode(str.replace(/\\CODE/g,""));
+    CodesLang[countCode]=curLang;
     countCode++;
     return "ECSOSDAEYCODEPARSERSERIALNO"+(countCode-1).toString()+"ENDPPPVF";
 }
@@ -149,7 +159,7 @@ function trim(str){
 }
 function codeback(str){
     for(i=0;i<countCode;i++){
-        str=str.replace("ECSOSDAEYCODEPARSERSERIALNO"+i.toString()+"ENDPPPVF",("</font></p><pre style=\"width:100%;overflow-x:auto;\"><code>"+trim(Codes[i])+"</code></pre><p><font style=\""+inlabelstyle+"\">").replace(/\$/g,"$$$$"));
+        str=str.replace("ECSOSDAEYCODEPARSERSERIALNO"+i.toString()+"ENDPPPVF",("</font></p><pre style=\"width:100%;overflow-x:auto;\"><code class=\"language-"+CodesLang[i]+"\">"+trim(Codes[i])+"</code></pre><p><font style=\""+inlabelstyle+"\">").replace(/\$/g,"$$$$"));
     }
     return str;
 }
