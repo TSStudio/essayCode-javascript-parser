@@ -30,3 +30,6 @@ https://highlightjs.org/
 | 1.3.1                       |       1.0 |
 | 1.3.2                       |       1.0 |
 | 1.4.0                       |       1.1 |
+
+## 语言列表
+https://github.com/highlightjs/highlight.js/blob/main/SUPPORTED_LANGUAGES.md
