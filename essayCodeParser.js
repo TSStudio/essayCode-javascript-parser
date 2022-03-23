@@ -172,6 +172,7 @@ function inlinecodeback(str){
 function parse(str){
     Formulas=new Array();
     Codes=new Array();
+    CodesLang=new Array();
     inlineCodes=new Array();
     countFormula=0;
     countCode=0;
