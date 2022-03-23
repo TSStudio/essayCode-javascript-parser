@@ -2,7 +2,7 @@ var defaultlastfontstyle="font-size:15px;font-weight:normal;color:#000000;text-a
 var lastfontstyle="font-size:15px;font-weight:normal;color:#000000;text-align:justify;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;";
 var inlabelstyle="";
 var curLang="";
-var essayCodeParserVersion="1.4.0";
+var essayCodeParserVersion="1.4.2";
 var essayCodeVersion="1.1";
 function existFunction(funcName){
     try{
