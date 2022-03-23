@@ -31,9 +31,6 @@ function setfontstyle(t){
     inlabelstyle=lastfontstyle.replace(/#/,",").replace(/"/,"&quot;");
     return "</font><font style=\""+inlabelstyle+"\">";
 }
-function setlanguage(t){
-    curLang=t.replace(/[\(\)]/g,"");
-}
 function image_parser(t){
     t=t.replace(/[\(\)]/g,"");
     if(t==""){
@@ -137,9 +134,18 @@ function formulaprocessor(str){
     countFormula++;
     return "EFSOSRAMYUCLOADEPARSERSERIALNO"+(countFormula-1).toString()+"ENDPPPVF";
 }
-function codeprocessor(str){
-    Codes[countCode]=htmlEncode(str.replace(/\\CODE/g,""));
+var ci;
+function langprocessor(str){
     CodesLang[countCode]=curLang;
+    if(str.replace(/\\CODE/g,"").replace(/[\(\)]/g,"")!=""){
+        CodesLang[ci]=str.replace(/\\CODE/g,"").replace(/[\(\)]/g,"");
+    }
+    return "";
+}
+function codeprocessor(str){
+    ci=countCode;
+    CodesLang[ci]="";
+    Codes[countCode]=htmlEncode(str.replace(/\\CODE(\([\s\S]*?\))?/g,langprocessor));
     countCode++;
     return "ECSOSDAEYCODEPARSERSERIALNO"+(countCode-1).toString()+"ENDPPPVF";
 }
