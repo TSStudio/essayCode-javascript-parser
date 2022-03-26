@@ -1,8 +1,15 @@
 var defaultlastfontstyle="font-size:15px;font-weight:normal;color:#000000;text-align:justify;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;";
 var lastfontstyle="font-size:15px;font-weight:normal;color:#000000;text-align:justify;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;";
+var defaultfontstyle=new Array();
+defaultfontstyle[0]="15px";
+defaultfontstyle[1]="normal";
+defaultfontstyle[2]="#000000";
+defaultfontstyle[3]="justify";
+defaultfontstyle[4]="none";
+defaultfontstyle[5]="-apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif";
 var inlabelstyle="";
 var curLang="";
-var essayCodeParserVersion="1.4.4";
+var essayCodeParserVersion="1.4.5";
 var essayCodeVersion="1.1";
 function existFunction(funcName){
     try{
