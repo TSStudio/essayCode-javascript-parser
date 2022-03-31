@@ -1,6 +1,9 @@
-var defaultlastfontstyle="font-size:15px;font-weight:normal;color:#000000;text-align:justify;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;";
-var lastfontstyle="font-size:15px;font-weight:normal;color:#000000;text-align:justify;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;";
+var essayCodeParserVersion="1.4.6";
+var essayCodeVersion="1.1";
+var lastfontstyle="";
 var defaultfontstyle=new Array();
+var dargs;
+var lastpstyle="text-align:justify;";
 defaultfontstyle[0]="15px";
 defaultfontstyle[1]="normal";
 defaultfontstyle[2]="#000000";
@@ -9,8 +12,6 @@ defaultfontstyle[4]="none";
 defaultfontstyle[5]="-apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif";
 var inlabelstyle="";
 var curLang="";
-var essayCodeParserVersion="1.4.5";
-var essayCodeVersion="1.1";
 function existFunction(funcName){
     try{
         if(typeof(eval(funcName))=="function"){
@@ -22,20 +23,38 @@ function existFunction(funcName){
 function setfontstyle(t){
     t=t.replace(/[\(\)]/g,"");
     args=t.split(",");
+    if(args.length<4||args[3]!=dargs[3]){
+        dargs=new Array();
+        dargs[0]=defaultfontstyle[0];
+        dargs[1]=defaultfontstyle[1]
+        dargs[2]=defaultfontstyle[2];
+        dargs[3]=defaultfontstyle[3];
+        dargs[4]=defaultfontstyle[4];
+        dargs[5]=defaultfontstyle[5];
+        for(i=0;i<6;i++){
+            if(i>=args.length){break;}
+            if(args[i]===""){continue;}
+            else{dargs[i]=args[i];}
+        }
+        lastpstyle="text-align:"+dargs[3]+";";
+        lastfontstyle="font-size:"+dargs[0]+";font-weight:"+dargs[1]+";color:"+dargs[2]+";text-decoration:"+dargs[4]+";font-family:"+dargs[5]+";";
+        inlabelstyle=lastfontstyle.replace(/%/,",").replace(/"/,"&quot;");
+        return "</font></p><p style=\""+lastpstyle+"\"><font style=\""+inlabelstyle+"\">";
+    }
     dargs=new Array();
-    dargs[0]="15px";
-    dargs[1]="normal";
-    dargs[2]="#000000";
-    dargs[3]="justify";
-    dargs[4]="none";
-    dargs[5]="-apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif";
+    dargs[0]=defaultfontstyle[0];
+    dargs[1]=defaultfontstyle[1]
+    dargs[2]=defaultfontstyle[2];
+    dargs[3]=defaultfontstyle[3];
+    dargs[4]=defaultfontstyle[4];
+    dargs[5]=defaultfontstyle[5];
     for(i=0;i<6;i++){
         if(i>=args.length){break;}
         if(args[i]===""){continue;}
         else{dargs[i]=args[i];}
     }
-    lastfontstyle="font-size:"+dargs[0]+";font-weight:"+dargs[1]+";color:"+dargs[2]+";text-align:"+dargs[3]+";text-decoration:"+dargs[4]+";font-family:"+dargs[5]+";";
-    inlabelstyle=lastfontstyle.replace(/#/,",").replace(/"/,"&quot;");
+    lastfontstyle="font-size:"+dargs[0]+";font-weight:"+dargs[1]+";color:"+dargs[2]+";text-decoration:"+dargs[4]+";font-family:"+dargs[5]+";";
+    inlabelstyle=lastfontstyle.replace(/%/,",").replace(/"/,"&quot;");
     return "</font><font style=\""+inlabelstyle+"\">";
 }
 function image_parser(t){
@@ -61,7 +80,7 @@ function title_parser(t){
     }else{
         title=t;
     }
-    return "</font></p><center><h1>"+title+"</h1></center><p><font style=\""+inlabelstyle+"\">";
+    return "</font></p><center><h1>"+title+"</h1></center><p style=\""+lastpstyle+"\"><font style=\""+inlabelstyle+"\">";
 }
 function smalltitle_parser(t){
     t=t.replace(/[\(\)]/g,"");
@@ -70,12 +89,12 @@ function smalltitle_parser(t){
     }else{
         title=t;
     }
-    return "</font></p><center><h3>"+title+"</h3></center><p><font style=\""+inlabelstyle+"\">";
+    return "</font></p><center><h3>"+title+"</h3></center><p style=\""+lastpstyle+"\"><font style=\""+inlabelstyle+"\">";
 }
 function beginbox_parser(t){
     t=t.replace(/[\(\)]/g,"");
     if(t==""){
-        return "</font></p><div><p><font>";
+        return "</font></p><div><p style=\""+lastpstyle+"\"><font>";
     }
     args=t.split(",");
     dargs=new Array();
@@ -91,14 +110,14 @@ function beginbox_parser(t){
         return "PARSE ERROR";
     }
     arg="width:"+dargs[0]+";"+(dargs[1]=="center"?"margin:0 auto 0 auto;":"")+"background-color:"+dargs[2]+";";
-    return "</font></p><div style=\""+arg+"\"><p><font style=\""+inlabelstyle+"\">";
+    return "</font></p><div style=\""+arg+"\"><p style=\""+lastpstyle+"\"><font style=\""+inlabelstyle+"\">";
 }
 function exp(code){
     code=code.replace(/ /g,"");
     if(code=="\\\\"){
         return "<br>";
     }else if(code=="\\par"){
-        return "</font></p><p style=\"text-indent:2em\"><font style=\""+inlabelstyle+"\">";
+        return "</font></p><p style=\"text-indent:2em;"+lastpstyle+"\"><font style=\""+inlabelstyle+"\">";
     }else if(code=="\\backslash"){
         return "\\";
     }else if(code=="\\backquote"){
@@ -106,7 +125,7 @@ function exp(code){
     }else if(code=="\\dollar"){
         return "$";
     }else if(code=="\\endbox()"){
-        return "</font></p></div><p><font style=\""+inlabelstyle+"\">";
+        return "</font></p></div><p style=\""+lastpstyle+"\"><font style=\""+inlabelstyle+"\">";
     }else if(code.substr(0,6)=="\\image"){
         return "</font>"+image_parser(code.substr(6,code.length))+"<font style=\""+inlabelstyle+"\">";
     }else if(code.substr(0,6)=="\\title"){
@@ -171,7 +190,7 @@ function trim(str){
 }
 function codeback(str){
     for(i=0;i<countCode;i++){
-        str=str.replace("ECSOSDAEYCODEPARSERSERIALNO"+i.toString()+"ENDPPPVF",("</font></p><pre style=\"width:100%;overflow-x:auto;\"><code class=\"language-"+CodesLang[i]+"\">"+trim(Codes[i])+"</code></pre><p><font style=\""+inlabelstyle+"\">").replace(/\$/g,"$$$$"));
+        str=str.replace("ECSOSDAEYCODEPARSERSERIALNO"+i.toString()+"ENDPPPVF",("</font></p><pre style=\"width:100%;overflow-x:auto;\"><code class=\"language-"+CodesLang[i]+"\">"+trim(Codes[i])+"</code></pre><p style=\""+lastpstyle+"\"><font style=\""+inlabelstyle+"\">").replace(/\$/g,"$$$$"));
     }
     return str;
 }
@@ -189,14 +208,21 @@ function parse(str){
     countFormula=0;
     countCode=0;
     countInlineCode=0;
-    lastfontstyle=defaultlastfontstyle;
+    dargs=new Array();
+    dargs[0]=defaultfontstyle[0];
+    dargs[1]=defaultfontstyle[1]
+    dargs[2]=defaultfontstyle[2];
+    dargs[3]=defaultfontstyle[3];
+    dargs[4]=defaultfontstyle[4];
+    dargs[5]=defaultfontstyle[5];
+    lastfontstyle="font-size:"+dargs[0]+";font-weight:"+dargs[1]+";color:"+dargs[2]+";text-decoration:"+dargs[4]+";font-family:"+dargs[5]+";";
     inlabelstyle=lastfontstyle.replace(/"/,"&quot;");
     //protects formulas and codes
     str=str.replace(/`[\s\S]*?`/g,inlineprocessor);
     str=str.replace(/\\CODE[\s\S]*?\\CODE/g,codeprocessor);
     str=str.replace(/\$\$[\s\S]*?\$\$/g,formulaprocessor);
     str=str.replace(/\$[\s\S]*?\$/g,formulaprocessor);
-    end="<p><font style=\""+inlabelstyle+"\">"+str.replace(/\\[a-zA-Z-\\]+(\([\s\S]*?\))?/g,exp)+"</font></p>";
+    end="<p style=\""+lastpstyle+"\"><font style=\""+inlabelstyle+"\">"+str.replace(/\\[a-zA-Z-\\]+(\([\s\S]*?\))?/g,exp)+"</font></p>";
     end=formulaback(end);
     end=inlinecodeback(end);
     end=codeback(end);
