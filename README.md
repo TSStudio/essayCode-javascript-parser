@@ -23,13 +23,8 @@ https://highlightjs.org/
 ## 版本对应表  
 | essayCode-javascript-parser | essayCode |
 |-----------------------------|-----------|
-| 1.0                         |       1.0 |
-| 1.1                         |       1.0 |
-| 1.2.1                       |       1.0 |
-| 1.3.0                       |       1.0 |
-| 1.3.1                       |       1.0 |
-| 1.3.2                       |       1.0 |
-| 1.4.0                       |       1.1 |
+| 1.0~1.3.2                   |       1.0 |
+| 1.4.0~                      |       1.1 |
 
 ## 语言列表
 https://github.com/highlightjs/highlight.js/blob/main/SUPPORTED_LANGUAGES.md
