@@ -1,4 +1,4 @@
-var essayCodeParserVersion="1.4.6";
+var essayCodeParserVersion="1.5.0";
 var essayCodeVersion="1.1";
 var lastfontstyle="";
 var defaultfontstyle=new Array();
@@ -39,7 +39,7 @@ function setfontstyle(t){
         lastpstyle="text-align:"+dargs[3]+";";
         lastfontstyle="font-size:"+dargs[0]+";font-weight:"+dargs[1]+";color:"+dargs[2]+";text-decoration:"+dargs[4]+";font-family:"+dargs[5]+";";
         inlabelstyle=lastfontstyle.replace(/%/,",").replace(/"/,"&quot;");
-        return "</font></p><p style=\""+lastpstyle+"\"><font style=\""+inlabelstyle+"\">";
+        return "</span></p><p style=\""+lastpstyle+"\"><span style=\""+inlabelstyle+"\">";
     }
     dargs=new Array();
     dargs[0]=defaultfontstyle[0];
@@ -55,7 +55,7 @@ function setfontstyle(t){
     }
     lastfontstyle="font-size:"+dargs[0]+";font-weight:"+dargs[1]+";color:"+dargs[2]+";text-decoration:"+dargs[4]+";font-family:"+dargs[5]+";";
     inlabelstyle=lastfontstyle.replace(/%/,",").replace(/"/,"&quot;");
-    return "</font><font style=\""+inlabelstyle+"\">";
+    return "</span><span style=\""+inlabelstyle+"\">";
 }
 function image_parser(t){
     t=t.replace(/[\(\)]/g,"");
@@ -80,7 +80,7 @@ function title_parser(t){
     }else{
         title=t;
     }
-    return "</font></p><center><h1>"+title+"</h1></center><p style=\""+lastpstyle+"\"><font style=\""+inlabelstyle+"\">";
+    return "</span></p><center><h1>"+title+"</h1></center><p style=\""+lastpstyle+"\"><span style=\""+inlabelstyle+"\">";
 }
 function smalltitle_parser(t){
     t=t.replace(/[\(\)]/g,"");
@@ -89,12 +89,12 @@ function smalltitle_parser(t){
     }else{
         title=t;
     }
-    return "</font></p><center><h3>"+title+"</h3></center><p style=\""+lastpstyle+"\"><font style=\""+inlabelstyle+"\">";
+    return "</span></p><center><h3>"+title+"</h3></center><p style=\""+lastpstyle+"\"><span style=\""+inlabelstyle+"\">";
 }
 function beginbox_parser(t){
     t=t.replace(/[\(\)]/g,"");
     if(t==""){
-        return "</font></p><div><p style=\""+lastpstyle+"\"><font>";
+        return "</span></p><div><p style=\""+lastpstyle+"\"><span>";
     }
     args=t.split(",");
     dargs=new Array();
@@ -110,14 +110,14 @@ function beginbox_parser(t){
         return "PARSE ERROR";
     }
     arg="width:"+dargs[0]+";"+(dargs[1]=="center"?"margin:0 auto 0 auto;":"")+"background-color:"+dargs[2]+";";
-    return "</font></p><div style=\""+arg+"\"><p style=\""+lastpstyle+"\"><font style=\""+inlabelstyle+"\">";
+    return "</span></p><div style=\""+arg+"\"><p style=\""+lastpstyle+"\"><span style=\""+inlabelstyle+"\">";
 }
 function exp(code){
     code=code.replace(/ /g,"");
     if(code=="\\\\"){
         return "<br>";
     }else if(code=="\\par"){
-        return "</font></p><p style=\"text-indent:2em;"+lastpstyle+"\"><font style=\""+inlabelstyle+"\">";
+        return "</span></p><p style=\"text-indent:2em;"+lastpstyle+"\"><span style=\""+inlabelstyle+"\">";
     }else if(code=="\\backslash"){
         return "\\";
     }else if(code=="\\backquote"){
@@ -125,9 +125,9 @@ function exp(code){
     }else if(code=="\\dollar"){
         return "$";
     }else if(code=="\\endbox()"){
-        return "</font></p></div><p style=\""+lastpstyle+"\"><font style=\""+inlabelstyle+"\">";
+        return "</span></p></div><p style=\""+lastpstyle+"\"><span style=\""+inlabelstyle+"\">";
     }else if(code.substr(0,6)=="\\image"){
-        return "</font>"+image_parser(code.substr(6,code.length))+"<font style=\""+inlabelstyle+"\">";
+        return "</span>"+image_parser(code.substr(6,code.length))+"<span style=\""+inlabelstyle+"\">";
     }else if(code.substr(0,6)=="\\title"){
         return title_parser(code.substr(6,code.length));
     }else if(code.substr(0,8)=="\\setfont"){
@@ -181,7 +181,7 @@ function inlineprocessor(str){
 }
 function formulaback(str){
     for(i=0;i<countFormula;i++){
-        str=str.replace("EFSOSRAMYUCLOADEPARSERSERIALNO"+i.toString()+"ENDPPPVF",("</font> "+Formulas[i]+" <font style=\""+inlabelstyle+"\">").replace(/\$/g,"$$$$"));
+        str=str.replace("EFSOSRAMYUCLOADEPARSERSERIALNO"+i.toString()+"ENDPPPVF",("</span> "+Formulas[i]+" <span style=\""+inlabelstyle+"\">").replace(/\$/g,"$$$$"));
     }
     return str;
 }
@@ -190,13 +190,13 @@ function trim(str){
 }
 function codeback(str){
     for(i=0;i<countCode;i++){
-        str=str.replace("ECSOSDAEYCODEPARSERSERIALNO"+i.toString()+"ENDPPPVF",("</font></p><pre style=\"width:100%;overflow-x:auto;\"><code class=\"language-"+CodesLang[i]+"\">"+trim(Codes[i])+"</code></pre><p style=\""+lastpstyle+"\"><font style=\""+inlabelstyle+"\">").replace(/\$/g,"$$$$"));
+        str=str.replace("ECSOSDAEYCODEPARSERSERIALNO"+i.toString()+"ENDPPPVF",("</span></p><pre style=\"width:100%;overflow-x:auto;\"><code class=\"language-"+CodesLang[i]+"\">"+trim(Codes[i])+"</code></pre><p style=\""+lastpstyle+"\"><span style=\""+inlabelstyle+"\">").replace(/\$/g,"$$$$"));
     }
     return str;
 }
 function inlinecodeback(str){
     for(i=0;i<countInlineCode;i++){
-        str=str.replace("ECSOSDAEYICNOLDIENPEARSERSERIALNO"+i.toString()+"ENDPPPVF",("</font><font style=\"background-color:#eeeeee;color:#020202;border:1px solid black;font-family:Consolas,Courier New;\">"+inlineCodes[i]+"</font><font style=\""+inlabelstyle+"\">").replace(/\$/g,"$$$$"));
+        str=str.replace("ECSOSDAEYICNOLDIENPEARSERSERIALNO"+i.toString()+"ENDPPPVF",("</span><span style=\"display:inline-block;background-color:#eeeeee;color:#020202;border:1px solid black;font-family:Consolas,Courier New;\">"+inlineCodes[i]+"</span><span style=\""+inlabelstyle+"\">").replace(/\$/g,"$$$$"));
     }
     return str;
 }
@@ -222,7 +222,7 @@ function parse(str){
     str=str.replace(/\\CODE[\s\S]*?\\CODE/g,codeprocessor);
     str=str.replace(/\$\$[\s\S]*?\$\$/g,formulaprocessor);
     str=str.replace(/\$[\s\S]*?\$/g,formulaprocessor);
-    end="<p style=\""+lastpstyle+"\"><font style=\""+inlabelstyle+"\">"+str.replace(/\\[a-zA-Z-\\]+(\([\s\S]*?\))?/g,exp)+"</font></p>";
+    end="<p style=\""+lastpstyle+"\"><span style=\""+inlabelstyle+"\">"+str.replace(/\\[a-zA-Z-\\]+(\([\s\S]*?\))?/g,exp)+"</span></p>";
     end=formulaback(end);
     end=inlinecodeback(end);
     end=codeback(end);
