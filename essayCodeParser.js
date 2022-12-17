@@ -1,4 +1,4 @@
-var essayCodeParserVersion = "1.5.0";
+var essayCodeParserVersion = "1.5.1";
 var essayCodeVersion = "1.1";
 var lastfontstyle = "";
 var defaultfontstyle = new Array();
