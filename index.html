@@ -1,43 +1,76 @@
 <!DOCTYPE html>
-<html style="height:100%;">
+<html style="height: 100%">
     <head>
-        <meta charset="UTF-8">
+        <meta charset="UTF-8" />
         <script src="essayCodeParser.js"></script>
         <script>
-            function refreshEssay(){
-                essayArea=document.getElementById("essay");
-                inputArea=document.getElementById("inputarea");
-                essayArea.innerHTML=parse(inputArea.value);
-                if(existFunction("renderMathInElement")){
-                    renderMathInElement(document.body,{
-                    delimiters: [
-                        {left: '$$', right: '$$', display: true},
-                        {left: '$', right: '$', display: false}
-                    ],
-                    throwOnError : false
+            function refreshEssay() {
+                essayArea = document.getElementById("essay");
+                inputArea = document.getElementById("inputarea");
+                essayArea.innerHTML = parse(inputArea.value);
+                if (existFunction("renderMathInElement")) {
+                    renderMathInElement(document.body, {
+                        delimiters: [
+                            { left: "$$", right: "$$", display: true },
+                            { left: "$", right: "$", display: false },
+                        ],
+                        throwOnError: false,
                     });
                 }
             }
         </script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">
-        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js" integrity="sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY" crossorigin="anonymous"></script>
-        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"
+            integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ"
+            crossorigin="anonymous"
+        />
+        <script
+            defer
+            src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"
+            integrity="sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            defer
+            src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
+            integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR"
+            crossorigin="anonymous"
+        ></script>
     </head>
-    <body style="height:100%;margin:0;">
-        <div style="display:inline-block;width:49%;height:100%;vertical-align:top;">
-            <form style="height:100%">
-                <textarea onchange="refreshEssay()" id="inputarea" style="width:100%;height:100%;"></textarea>
+    <body style="height: 100%; margin: 0">
+        <div
+            style="
+                display: inline-block;
+                width: 49%;
+                height: 100%;
+                vertical-align: top;
+            "
+        >
+            <form style="height: 100%">
+                <textarea
+                    oninput="refreshEssay()"
+                    id="inputarea"
+                    style="width: 100%; height: 100%"
+                ></textarea>
             </form>
         </div>
-        <div id="essay" style="display:inline-block;width:49%;border:3px solid black;vertical-align:top;">
-        </div>
+        <div
+            id="essay"
+            style="
+                display: inline-block;
+                width: 49%;
+                border: 3px solid black;
+                vertical-align: top;
+            "
+        ></div>
     </body>
     <script>
-        window.onload=function(){
-            inputArea=document.getElementById("inputarea");
-            inputArea.value='\\title(主标题)\n这是普通文本\n\\smalltitle(小标题)\n普通文本\n\\\\\n换行\n\\par \n换段\n\\beginbox(100%,,red)\nbox修改背景颜色\n\\setfont(,,white)\n文本颜色修改\n\\beginbox(90%,,green)\n嵌套box尺寸修改及更换背景颜色\n\\endbox()\n\\beginbox(90%,default,#66CCFF)\n\\setfont(2em,bold,black,,underline,"宋体"#"sans-serif")\n嵌套box对齐方式修改及文本更多属性修改\n\\endbox()\n\\endbox()\n\\setfont()\n恢复文本默认值\\\\\n独行公式\n$$f(x)=e^x$$\n这是行内公式 $\\pi (x)=\\dfrac{x}{\\ln(x)}$，而这是行间代码：\n\\CODE\nint main(){\n    return 0;\n}\n\\CODE\n也可添加行内代码，比如 `main()` 这样，注意：为了性能考虑，只有当你的鼠标点击别处（焦点离开编辑框）时，右侧的内容才会刷新。';
+        window.onload = function () {
+            inputArea = document.getElementById("inputarea");
+            inputArea.value =
+                '\\title(主标题)\n这是普通文本\n\\smalltitle(小标题)\n普通文本\n\\\\\n换行\n\\par \n换段\n\\beginbox(100%,,red)\nbox修改背景颜色\n\\setfont(,,white)\n文本颜色修改\n\\beginbox(90%,,green)\n嵌套box尺寸修改及更换背景颜色\n\\endbox()\n\\beginbox(90%,default,#66CCFF)\n\\setfont(2em,bold,black,,underline,"宋体"#"sans-serif")\n嵌套box对齐方式修改及文本更多属性修改\n\\endbox()\n\\endbox()\n\\setfont()\n恢复文本默认值\\\\\n独行公式\n$$f(x)=e^x$$\n这是行内公式 $\\pi (x)=\\dfrac{x}{\\ln(x)}$，而这是行间代码：\n\\CODE\nint main(){\n    return 0;\n}\n\\CODE\n也可添加行内代码，比如 `main()` 这样';
             refreshEssay();
         };
-
     </script>
 </html>

@@ -1,4 +1,4 @@
-var essayCodeParserVersion = "1.5.1";
+var essayCodeParserVersion = "1.5.2";
 var essayCodeVersion = "1.1";
 var lastfontstyle = "";
 var defaultfontstyle = new Array();
@@ -272,6 +272,8 @@ var ci;
 function langprocessor(str) {
     if (str.replace(/\\CODE/g, "").replace(/[\(\)]/g, "") != "") {
         CodesLang[ci] = str.replace(/\\CODE/g, "").replace(/[\(\)]/g, "");
+        // remove \n at start
+        CodesLang[ci] = CodesLang[ci].replace(/^\n+/, "");
     }
     return "";
 }
